@@ -309,8 +309,24 @@ public class GameManager {
         return null;
     }
 
+    public String getStoryLine() {
+        return storyLine;
+    }
+
+    public boolean isGameWon() {
+        return player.getInventory().stream()
+                .anyMatch(item -> ConfigBasedInitializer.VICTORY_ITEM_ID.equals(item.getId()));
+    }
+
+    public Map<String, String> getAvailableDirections() {
+        Room currentRoom = rooms.get(player.getCurrentRoomId());
+        if (currentRoom == null) {
+            return Map.of();
+        }
+        return Map.copyOf(currentRoom.getExits());
+    }
+
     // Getter
     public Player getPlayer() { return player; }
     public Map<String, Room> getRooms() { return rooms; }
-    public String getStoryLine() { return storyLine; }
 }
