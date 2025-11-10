@@ -58,6 +58,17 @@ public class GameManager {
     }
 
     /**
+     * 获取当前房间描述
+     */
+    public String getCurrentRoomDescription() {
+        Room currentRoom = rooms.get(player.getCurrentRoomId());
+        if (currentRoom != null) {
+            return "你现在在【" + currentRoom.getName() + "】\n" + currentRoom.getDescription() + "\n剧情提示：" + currentRoom.getStoryHint();
+        }
+        return "错误：找不到当前房间！";
+    }
+
+    /**
      * 移动到指定方向的房间
      */
     public String move(String direction) {
